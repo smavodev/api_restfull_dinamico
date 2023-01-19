@@ -40,3 +40,18 @@ Tabla: **Categories**
 - token_**sufijo**
 - token_exp_**sufijo**
 
+--------------------------------------
+
+## Estructura de la API RESTFULL
+Para mantener las buenas prácticas debemos trabajar con la estructura **Modelo Vista Controlador** y hacer peticiones a la base de datos a travéz de métodos HTTP:
+- GET
+- POST
+- PUT 
+- DELETE
+
+Estructura de carpetas:
+- Rutas (**routes**)
+- Controladores (**controllers**)
+- Modelos (**models**)
+- Base de datos (**database**)
+
