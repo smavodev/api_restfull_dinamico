@@ -55,3 +55,19 @@ Estructura de carpetas:
 - Modelos (**models**)
 - Base de datos (**database**)
 
+--------------------------------------
+
+### Configurar archivo .htaccess
+El archivo .htaccess (HyperText Access o acceso de hipertexto) es un archivo de configuración del software de servidor Apache, que contiene las directivas que definen el comportamiento de Apache. El archivo.htaccess indica en todo momento qué puede hacer y qué no el usuario que visita tu web, así como configurar el comportamiento del servidor ante errores de conexión u optimizar la carga de las páginas
+
+Es un archivo que se usa para los proyectos que usan servidores apache
+Estructura del archivo .htaccess:
+```
+Options All -Indexes
+Options -MultiViews
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+```
