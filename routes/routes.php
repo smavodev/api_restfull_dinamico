@@ -16,4 +16,3 @@ if (count($routesArray) == 0) {
     return;
 }
 
-/*===== Cuando si se hace una petición a la API =====*/
