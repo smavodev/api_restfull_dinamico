@@ -5,7 +5,7 @@ class Connection{
     /*===== Información de la base de datos =====*/
 	static public function infoDatabase(){
 		$infoDB = array(
-			"database" => "database-1",
+			"database" => "database-2",
 			"user" => "root",
 			"pass" => ""
 		);
