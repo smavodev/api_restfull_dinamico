@@ -2,18 +2,21 @@
 
 require_once "models/get.model.php";
 
-class GetController
-{
+class GetController {
 
-    /*===== Peticiones GET =====*/
+    /*===== Peticiones GET sin filtro =====*/
     static public function getData($table, $select) {
-
         $response = GetModel::getData($table, $select);
-
         $return = new GetController();
         $return->fncResponse($response);
     }
 
+    /*===== Peticiones GET con filtro =====*/
+    static public function getDataFilter($table, $select, $linkTo, $equalTo){
+        $response = GetModel::getDataFilter($table, $select, $linkTo, $equalTo);
+		$return = new GetController();
+		$return -> fncResponse($response);
+    }
 
     public function fncResponse($response) {
 
@@ -32,6 +35,7 @@ class GetController
         }
 
         echo json_encode($json, http_response_code($json["status"]));
+        
     }
 
 
