@@ -2,12 +2,19 @@
 
 require_once "connection.php";
 
-class GetModel {
+class GetModel
+{
 
     /*===== Peticiones GET sin filtro =====*/
-    static public function getData($table, $select) {
+    static public function getData($table, $select, $orderBy, $orderMode){
 
-        $sql = "SELECT $select FROM $table";
+
+        $sql = "SELECT $select FROM $table ";
+
+        if ($orderBy != null && $orderMode != null) {
+            $sql = "SELECT $select FROM $table ORDER BY $orderBy $orderMode";
+        }
+
         $stmt = Connection::connect()->prepare($sql);
 
         $stmt->execute();
@@ -16,34 +23,35 @@ class GetModel {
     }
 
     /*===== Peticiones GET con filtro =====*/
-    static public function getDataFilter($table, $select, $linkTo, $equalTo){
-        
-		$linkToArray = explode(",",$linkTo);
-		$equalToArray = explode(",",$equalTo);
-		$linkToText = "";
+    static public function getDataFilter($table, $select, $linkTo, $equalTo, $orderBy, $orderMode){
 
-		if(count($linkToArray)>1){
+        $linkToArray = explode(",", $linkTo);
+        $equalToArray = explode(",", $equalTo);
+        $linkToText = "";
 
-			foreach ($linkToArray as $key => $value) {
-				if($key > 0){
-					$linkToText .= "AND ".$value." = :".$value." ";
-				}
-			}
+        if (count($linkToArray) > 1) {
 
-		}
-        
+            foreach ($linkToArray as $key => $value) {
+                if ($key > 0) {
+                    $linkToText .= "AND " . $value . " = :" . $value . " ";
+                }
+            }
+        }
+
         $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ";
-        
+
+        if ($orderBy != null && $orderMode != null) {
+            $sql = "SELECT $select FROM $table WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ORDER BY $orderBy $orderMode";
+        }
+
         $stmt = Connection::connect()->prepare($sql);
 
         foreach ($linkToArray as $key => $value) {
-			$stmt -> bindParam(":".$value, $equalToArray[$key], PDO::PARAM_STR);
-		}
+            $stmt->bindParam(":" . $value, $equalToArray[$key], PDO::PARAM_STR);
+        }
 
-        $stmt -> execute();
+        $stmt->execute();
 
-        return $stmt -> fetchAll(PDO::FETCH_CLASS);
-
+        return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
-
 }
