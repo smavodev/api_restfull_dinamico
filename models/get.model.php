@@ -128,4 +128,89 @@ class GetModel
     
     }
 
+    /*===== Peticiones GET con filtro entre tablas relacionadas =====*/
+	static public function getRelDataFilter($rel, $type, $select, $linkTo, $equalTo, $orderBy,$orderMode,$startAt,$endAt){
+
+		/*===== Organizamos los filtros =====*/
+		$linkToArray = explode(",",$linkTo);
+		$equalToArray = explode(",",$equalTo);
+		$linkToText = "";
+
+		if(count($linkToArray)>1){
+
+			foreach ($linkToArray as $key => $value) {
+
+				if($key > 0){
+					$linkToText .= "AND ".$value." = :".$value." ";
+				}
+			}
+
+		}
+
+		/*===== Organizamos las relaciones =====*/
+		$relArray = explode(",", $rel);
+		$typeArray = explode(",", $type);
+		$innerJoinText = "";
+
+		if(count($relArray)>1){
+
+			foreach ($relArray as $key => $value) {
+
+				if($key > 0){
+					$innerJoinText .= "INNER JOIN ".$value." ON ".$relArray[0].".id_".$typeArray[$key]."_".$typeArray[0] ." = ".$value.".id_".$typeArray[$key]." ";
+				}
+			}
+
+            /*===== Peticiones GET con filtro - Sin Ordenar Datos - Sin Limitar Datos =====*/
+			$sql = "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkToArray[0] = :$linkToArray[0] $linkToText";
+
+
+            /*===== Peticiones GET con filtro + Ordenar Datos - Sin Limitar Datos =====*/
+			if($orderBy != null && $orderMode != null && $startAt == null && $endAt == null){
+
+				$sql = "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ORDER BY $orderBy $orderMode";
+
+			}
+
+            /*===== Peticiones GET con filtro + Ordenar Datos + Limitar de datos =====*/
+			if($orderBy != null && $orderMode != null && $startAt != null && $endAt != null){
+
+				$sql = "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkToArray[0] = :$linkToArray[0] $linkToText ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
+
+			}
+
+             /*===== Peticiones GET con filtro - Sin Ordenar Datos + Limitar Datos =====*/
+			if($orderBy == null && $orderMode == null && $startAt != null && $endAt != null){
+
+				$sql = "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkToArray[0] = :$linkToArray[0] $linkToText LIMIT $startAt, $endAt";
+
+			}
+
+			$stmt = Connection::connect()->prepare($sql);
+
+			foreach ($linkToArray as $key => $value) {
+			
+				$stmt -> bindParam(":".$value, $equalToArray[$key], PDO::PARAM_STR);
+
+			}
+
+			try{
+
+				$stmt -> execute();
+
+			}catch(PDOException $Exception){
+
+				return null;
+			
+			}
+
+			return $stmt -> fetchAll(PDO::FETCH_CLASS);
+
+		}else{
+
+			return null;
+		}
+		
+	}
+
 }
