@@ -1,0 +1,12 @@
+[22-Jan-2023 23:05:13 Europe/Berlin] PHP Warning:  Undefined variable $filterTo in C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php on line 44
+[22-Jan-2023 23:05:13 Europe/Berlin] PHP Warning:  Undefined variable $inTo in C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php on line 44
+[22-Jan-2023 23:05:45 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function GetController::getDataRange(), 9 passed in C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php on line 44 and exactly 11 expected in C:\xampp\htdocs\apirest-dinamica-full\controllers\get.controller.php:56
+Stack trace:
+#0 C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php(44): GetController::getDataRange('products', '*', 'date_created_pr...', '2021-10-15', '2021-10-19', NULL, NULL, NULL, NULL)
+#1 C:\xampp\htdocs\apirest-dinamica-full\routes\routes.php(26): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\apirest-dinamica-full\controllers\routes.controller.php(7): include('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\apirest-dinamica-full\index.php(18): RoutesController->index()
+#4 {main}
+  thrown in C:\xampp\htdocs\apirest-dinamica-full\controllers\get.controller.php on line 56
+[22-Jan-2023 23:05:57 Europe/Berlin] PHP Warning:  Undefined variable $filterTo in C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php on line 44
+[22-Jan-2023 23:05:57 Europe/Berlin] PHP Warning:  Undefined variable $inTo in C:\xampp\htdocs\apirest-dinamica-full\routes\services\get.php on line 44
