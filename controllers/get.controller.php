@@ -35,6 +35,7 @@ class GetController {
 		$return -> fncResponse($response);
 	}
 
+
     /*====== Peticiones GET para el buscador sin tablas relaciones =====*/
     static public function getDataSearch($table, $select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt){
 		$response = GetModel::getDataSearch($table, $select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt);
@@ -42,6 +43,16 @@ class GetController {
 		$return -> fncResponse($response);
 	}
 
+
+    /*====== Peticiones GET para el buscador con tablas relaciones =====*/
+	static public function getRelDataSearch($rel,$type,$select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt){
+		$response = GetModel::getRelDataSearch($rel,$type,$select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt);
+		$return = new GetController();
+		$return -> fncResponse($response);
+	}
+
+
+    
     /*===== Respuestas del controlador =====*/
     public function fncResponse($response){
 
