@@ -2,8 +2,7 @@
 
 require_once "connection.php";
 
-class GetModel
-{
+class GetModel {
 
     /*===== Peticiones GET sin filtro =====*/
     static public function getData($table, $select, $orderBy, $orderMode, $startAt, $endAt){
@@ -179,7 +178,7 @@ class GetModel
 
 			}
 
-             /*===== Peticiones GET con filtro - Sin Ordenar Datos + Limitar Datos =====*/
+            /*===== Peticiones GET con filtro - Sin Ordenar Datos + Limitar Datos =====*/
 			if($orderBy == null && $orderMode == null && $startAt != null && $endAt != null){
 
 				$sql = "SELECT $select FROM $relArray[0] $innerJoinText WHERE $linkToArray[0] = :$linkToArray[0] $linkToText LIMIT $startAt, $endAt";
@@ -195,22 +194,34 @@ class GetModel
 			}
 
 			try{
-
 				$stmt -> execute();
-
 			}catch(PDOException $Exception){
-
 				return null;
-			
 			}
 
 			return $stmt -> fetchAll(PDO::FETCH_CLASS);
 
 		}else{
-
 			return null;
 		}
 		
 	}
+
+    /*===== Peticiones GET para el buscador sin tablas relaciones =====*/
+    static public function getDataSearch($table, $select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt){
+        
+
+
+
+         /*===== Peticiones GET sin filtro - Sin Ordenar Datos - Sin Limitar Datos =====*/
+		$sql = "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%' ";
+
+		$stmt = Connection::connect()->prepare($sql);
+		$stmt -> execute();
+		return $stmt -> fetchAll(PDO::FETCH_CLASS);
+
+    }
+
+    
 
 }
