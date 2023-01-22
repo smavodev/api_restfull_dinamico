@@ -52,9 +52,9 @@ class GetController {
 	}
 
 
-    /*====== Peticiones GET para la seleccion sin tablas relacionadas =====*/
-    static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt){
-		$response = GetModel::getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt);
+    /*====== Peticiones GET para la seleccion de rangos sin tablas relacionadas =====*/
+    static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt, $filterTo, $inTo){
+		$response = GetModel::getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt, $filterTo, $inTo);
 		$return = new GetController();
 		$return -> fncResponse($response);
 	}

@@ -356,33 +356,33 @@ class GetModel {
 	}
 
     /*===== Peticiones GET para la seleccion de rangos sin tablas relaciones =====*/
-	static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt){
+	static public function getDataRange($table,$select,$linkTo,$between1,$between2,$orderBy,$orderMode,$startAt,$endAt, $filterTo, $inTo){
         
+		$filter = "";
+
+		if($filterTo != null && $inTo != null){
+
+			$filter = 'AND '.$filterTo.' IN ('.$inTo.')';
+
+		}
+
          /*===== Peticiones GET para la seleccion de rangos sin filtro - Sin Ordenar Datos - Sin Limitar Datos =====*/
-		$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2' ";
+		$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2' $filter";
 
 	
         /*===== Peticiones GET para la seleccion de rangos sin filtro + Ordenar Datos - Sin Limitar Datos =====*/
 		if($orderBy != null && $orderMode != null && $startAt == null && $endAt == null){
-
-			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2'  ORDER BY $orderBy $orderMode";
-
+			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2' $filter ORDER BY $orderBy $orderMode";
 		}
 
-		
         /*===== Peticiones GET para la seleccion de rangos sin filtro + Ordenar Datos + Limitar de datos =====*/
 		if($orderBy != null && $orderMode != null && $startAt != null && $endAt != null){
-
-			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2'  ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
-
+			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2' $filter ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
 		}
-
 
         /*===== Peticiones GET para la seleccion de rangos sin filtro - Sin Ordenar Datos + Limitar Datos =====*/
 		if($orderBy == null && $orderMode == null && $startAt != null && $endAt != null){
-
-			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2'  LIMIT $startAt, $endAt";
-
+			$sql = "SELECT $select FROM $table WHERE $linkTo BETWEEN '$between1' AND '$between2' $filter LIMIT $startAt, $endAt";
 		}
 
 

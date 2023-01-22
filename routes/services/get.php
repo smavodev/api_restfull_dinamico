@@ -11,6 +11,8 @@ $orderBy = $_GET["orderBy"] ?? null;
 $orderMode = $_GET["orderMode"] ?? null;
 $startAt = $_GET["startAt"] ?? null;
 $endAt = $_GET["endAt"] ?? null;
+$filterTo = $_GET["filterTo"] ?? null;
+$inTo = $_GET["inTo"] ?? null;
 
 $response = new GetController();
 
@@ -42,7 +44,7 @@ if(isset($_GET["linkTo"]) && isset($_GET["equalTo"]) && !isset($_GET["rel"]) && 
     
 /*===== Peticiones GET para la seleccion de rangos sin tablas relacionadas =====*/
 }else if(!isset($_GET["rel"]) && !isset($_GET["type"]) && isset($_GET["linkTo"]) && isset($_GET["between1"]) && isset($_GET["between2"])){
-	$response -> getDataRange($table,$select,$_GET["linkTo"],$_GET["between1"],$_GET["between2"],$orderBy,$orderMode,$startAt,$endAt);
+	$response -> getDataRange($table,$select,$_GET["linkTo"],$_GET["between1"],$_GET["between2"],$orderBy,$orderMode,$startAt,$endAt, $filterTo, $inTo);
 
 
 } else {
