@@ -208,17 +208,63 @@ class GetModel {
 	}
 
     /*===== Peticiones GET para el buscador sin tablas relaciones =====*/
-    static public function getDataSearch($table, $select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt){
-        
+	static public function getDataSearch($table, $select, $linkTo, $search,$orderBy,$orderMode,$startAt,$endAt){
+   
+		$linkToArray = explode(",",$linkTo);
+		$searchArray = explode(",",$search);
+        $linkToText= "";
+		
+        if(count($linkToArray)>1){
 
+			foreach ($linkToArray as $key => $value) {
+				
+				if($key > 0){
 
+					$linkToText .= "AND ".$value." = :".$value." ";
+				}
+			}
+
+		}
 
          /*===== Peticiones GET sin filtro - Sin Ordenar Datos - Sin Limitar Datos =====*/
-		$sql = "SELECT $select FROM $table WHERE $linkTo LIKE '%$search%' ";
+		$sql = "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchArray[0]%' $linkToText";
+
+
+        /*===== Peticiones GET sin filtro + Ordenar Datos - Sin Limitar Datos =====*/
+        if($orderBy != null && $orderMode != null && $startAt == null && $endAt == null){
+			$sql = "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchArray[0]%' $linkToText ORDER BY $orderBy $orderMode";
+		}
+
+
+        /*===== Peticiones GET sin filtro + Ordenar Datos + Limitar de datos =====*/
+        if($orderBy != null && $orderMode != null && $startAt != null && $endAt != null){
+			$sql = "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchArray[0]%' $linkToText ORDER BY $orderBy $orderMode LIMIT $startAt, $endAt";
+		}
+
+
+        /*===== Peticiones GET sin filtro - Sin Ordenar Datos + Limitar Datos =====*/
+        if($orderBy == null && $orderMode == null && $startAt != null && $endAt != null){
+			$sql = "SELECT $select FROM $table WHERE $linkToArray[0] LIKE '%$searchArray[0]%' $linkToText LIMIT $startAt, $endAt";
+		}
+
 
 		$stmt = Connection::connect()->prepare($sql);
-		$stmt -> execute();
+
+		foreach ($linkToArray as $key => $value) {
+
+			if($key > 0){
+				$stmt -> bindParam(":".$value, $searchArray[$key], PDO::PARAM_STR);
+			}
+
+		}
+		try{
+			$stmt -> execute();
+		}catch(PDOException $Exception){
+			return null;
+		}
+
 		return $stmt -> fetchAll(PDO::FETCH_CLASS);
+
 
     }
 
