@@ -33,9 +33,14 @@ class GetModel {
             $sql = "SELECT $select FROM $table LIMIT $startAt, $endAt";
         }
 
-        $stmt = Connection::connect()->prepare($sql);
+		$stmt = Connection::connect()->prepare($sql);
 
-        $stmt->execute();
+		/*===== Depurar errores con Try Catch =====*/
+		try{
+			$stmt -> execute();
+		}catch(PDOException $Exception){
+			return null;
+		}
 
         return $stmt->fetchAll(PDO::FETCH_CLASS); /* para nos mostrar los indices agregar: PDO::FETCH_CLASS */
     }
@@ -96,7 +101,12 @@ class GetModel {
             $stmt->bindParam(":" . $value, $equalToArray[$key], PDO::PARAM_STR);
         }
 
-        $stmt->execute();
+        /*===== Depurar errores con Try Catch =====*/
+		try{
+			$stmt -> execute();
+		}catch(PDOException $Exception){
+			return null;
+		}
 
         return $stmt->fetchAll(PDO::FETCH_CLASS);
     }
@@ -143,15 +153,18 @@ class GetModel {
 				$sql = "SELECT $select FROM $relArray[0] $innerJoinText LIMIT $startAt, $endAt";
 			}
 
-
             $stmt = Connection::connect()->prepare($sql);
 
-            $stmt->execute();
+            /*===== Depurar errores con Try Catch =====*/
+			try{
+				$stmt -> execute();
+			}catch(PDOException $Exception){
+				return null;
+			}
 
             return $stmt->fetchAll(PDO::FETCH_CLASS);
 
 		} else{
-
 			return null;
 		}
     
@@ -230,6 +243,7 @@ class GetModel {
 
 			}
 
+			/*===== Depurar errores con Try Catch =====*/
 			try{
 				$stmt -> execute();
 			}catch(PDOException $Exception){
@@ -310,6 +324,8 @@ class GetModel {
 			}
 
 		}
+		
+		/*===== Depurar errores con Try Catch =====*/
 		try{
 			$stmt -> execute();
 		}catch(PDOException $Exception){
@@ -317,7 +333,6 @@ class GetModel {
 		}
 
 		return $stmt -> fetchAll(PDO::FETCH_CLASS);
-
 
     }
 
@@ -393,6 +408,7 @@ class GetModel {
 
 			}
 
+			/*===== Depurar errores con Try Catch =====*/
 			try{
 				$stmt -> execute();
 			}catch(PDOException $Exception){
@@ -468,6 +484,7 @@ class GetModel {
 
 		$stmt = Connection::connect()->prepare($sql);
 
+		/*===== Depurar errores con Try Catch =====*/
 		try{
 			$stmt -> execute();
 		}catch(PDOException $Exception){
@@ -537,6 +554,7 @@ class GetModel {
 
 			$stmt = Connection::connect()->prepare($sql);
 
+			/*===== Depurar errores con Try Catch =====*/
 			try{
 				$stmt -> execute();
 			}catch(PDOException $Exception){
