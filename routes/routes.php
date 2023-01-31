@@ -1,5 +1,7 @@
 <?php
 
+require_once "models/connection.php";
+require_once "controllers/get.controller.php";
 
 $routesArray = explode("/", $_SERVER['REQUEST_URI']); /* obtener el dato que se envia en el indice  */
 $routesArray = array_filter($routesArray); /* Filtro para obtener el indice*/
@@ -20,6 +22,8 @@ if (count($routesArray) == 0) {
 /*===== Cuando Si se hace ninguna petición a la API =====*/
 if(count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])){
 
+    $table = explode("?",$routesArray[1])[0]; /* me trae el primer indice (nombre de la tabla) */
+
     /*===== Peticiones GET =====*/
 	if($_SERVER['REQUEST_METHOD'] == "GET"){
         
@@ -30,12 +34,7 @@ if(count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])){
 	/*===== Peticiones POST =====*/
 	if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-        $json = array(
-            'status' => 200,
-            'results' => 'Solicitud POST'
-        );
-
-        echo json_encode($json, http_response_code($json["status"]));
+        include "services/post.php";
 	}
 
 	/*===== Peticiones PUT =====*/

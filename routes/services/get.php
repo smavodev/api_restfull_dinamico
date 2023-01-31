@@ -4,7 +4,6 @@
 require_once "controllers/get.controller.php";
 require_once "models/connection.php";
 
-$table = explode("?",$routesArray[1])[0]; /* me trae el primer indice (nombre de la tabla) */
 
 $select = $_GET["select"] ?? "*";
 $orderBy = $_GET["orderBy"] ?? null;
