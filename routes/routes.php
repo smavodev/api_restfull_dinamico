@@ -8,6 +8,7 @@ $routesArray = array_filter($routesArray); /* Filtro para obtener el indice*/
 
 /*===== Cuando no se hace ninguna petición a la API =====*/
 if (count($routesArray) == 0) {
+
     $json = array(
         'status' => 404,
 		'results' => 'Not Found'
@@ -16,6 +17,7 @@ if (count($routesArray) == 0) {
 	echo json_encode($json, http_response_code($json["status"]));
 
     return;
+    
 }
 
 
@@ -41,13 +43,7 @@ if(count($routesArray) == 1 && isset($_SERVER['REQUEST_METHOD'])){
 
 	/*===== Peticiones DELETE =====*/
 	if($_SERVER['REQUEST_METHOD'] == "DELETE"){
-
-        $json = array(
-            'status' => 200,
-            'results' => 'Solicitud DELETE'
-        );
-
-		echo json_encode($json, http_response_code($json["status"]));
+        include "services/delete.php";
 	}
 
 }
