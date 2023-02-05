@@ -1,7 +1,13 @@
 <?php
 
+require_once "models/get.model.php";
 require_once "models/post.model.php";
 require_once "models/connection.php";
+
+require_once "vendor/autoload.php";
+use Firebase\JWT\JWT;
+
+require_once "models/put.model.php";
 
 class PostController
 {
@@ -12,7 +18,7 @@ class PostController
         $response = PostModel::postData($table, $data);
 
         $return = new PostController();
-        $return->fncResponse($response, null);
+        $return->fncResponse($response, null, null);
     }
 
     /*====== Peticion POST para registrar usuario =====*/
@@ -27,7 +33,7 @@ class PostController
             $response = PostModel::postData($table, $data);
 
             $return = new PostController();
-            $return -> fncResponse($response, null);
+            $return -> fncResponse($response, null, $suffix);
 
         } 
 
@@ -46,7 +52,31 @@ class PostController
             
             if($response[0]->{"password_".$suffix} == $crypt){
 
-                /* Creacion del Token de Seguridad */
+                /*====== Creacion del Token de Seguridad ======*/
+                $token = Connection::jwt($response[0]->{"id_".$suffix}, $response[0]->{"email_".$suffix});
+
+                $jwt = JWT::encode($token, "dfhsdfg34dfchs4xgsrsdry46");
+
+                /*====== Actualizamos la base de datos con el Token del usuario ======*/
+                $data = array(
+
+                    "token_".$suffix => $jwt,
+                    "token_exp_".$suffix => $token["exp"]
+
+                );
+
+                $update = PutModel::putData($table, $data, $response[0]->{"id_".$suffix}, "id_".$suffix);
+
+                if(isset($update["comment"]) && $update["comment"] == "The process was successful" ){
+
+                    $response[0]->{"token_".$suffix} = $jwt;
+                    $response[0]->{"token_exp_".$suffix} = $token["exp"];
+
+                    $return = new PostController();
+                    $return -> fncResponse($response, null,$suffix);
+
+                }
+
 
             } else {
                 $response = null;
@@ -65,9 +95,15 @@ class PostController
 
 
     /*===== Respuestas del controlador =====*/
-    public function fncResponse($response, $error) {
+    public function fncResponse($response, $error, $suffix) {
+
 
         if (!empty($response)) {
+
+            /*===== Quitamos la contraseña de la respuesta ======*/
+			if(isset($response[0]->{"password_".$suffix})){
+				unset($response[0]->{"password_".$suffix});
+			}
 
             $json = array(
                 'status' => 200,

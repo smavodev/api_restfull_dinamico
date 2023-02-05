@@ -71,3 +71,6 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 ```
+
+### Instalar php-JWT
+composer require firebase/php-jwt
