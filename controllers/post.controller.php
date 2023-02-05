@@ -7,8 +7,7 @@ class PostController
 {
 
     /*===== Peticion POST para crear datos =====*/
-    static public function postData($table, $data)
-    {
+    static public function postData($table, $data) {
 
         $response = PostModel::postData($table, $data);
 
@@ -16,10 +15,27 @@ class PostController
         $return->fncResponse($response);
     }
 
+    /*====== Peticion POST para registrar usuario =====*/
+    static public function postRegister($table, $data, $suffix){
+
+        if(isset($data["password_".$suffix]) && $data["password_".$suffix] != null){
+
+            $crypt = crypt($data["password_".$suffix], '$2a$07$azybxcags23425sdg231nd1sm4rt$');
+
+			$data["password_".$suffix] = $crypt;
+
+            $response = PostModel::postData($table, $data);
+
+            $return = new PostController();
+            $return -> fncResponse($response);
+
+        } 
+
+    }
+
 
     /*===== Respuestas del controlador =====*/
-    public function fncResponse($response)
-    {
+    public function fncResponse($response) {
 
         if (!empty($response)) {
 

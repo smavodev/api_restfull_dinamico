@@ -27,8 +27,22 @@ if(isset($_POST)){
 
 	}
 
-    /*====== Solicitamos respuesta del controlador para crear datos en cualquier tabla =====*/	
-    $response = new PostController();
-    $response -> postData($table, $_POST);
+	
+	$response = new PostController();
+
+	/*======Peticion POST para registrar usuario =====*/	
+	if(isset($_GET["register"]) && $_GET["register"] == true){
+	
+		$suffix = $_GET["suffix"] ?? "user";
+		$response -> postRegister($table,$_POST,$suffix);
+
+	} else {
+
+
+		$response -> postData($table, $_POST);
+
+	}
+
+    
 
 }
