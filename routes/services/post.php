@@ -30,11 +30,12 @@ if(isset($_POST)){
 	
 	$response = new PostController();
 
+
 	/*======Peticion POST para registrar usuario =====*/	
 	if(isset($_GET["register"]) && $_GET["register"] == true){
 	
 		$suffix = $_GET["suffix"] ?? "user";
-		
+
 		$response -> postRegister($table,$_POST,$suffix);
 
 	}else if(isset($_GET["login"]) && $_GET["login"] == true){
@@ -45,11 +46,63 @@ if(isset($_POST)){
 
 	}else{
 
+		if(isset($_GET["token"])){
 
-		$response -> postData($table, $_POST);
+			/*===== Peticion POST para usuarios autorizados =====*/
+			$tableToken = $_GET["table"] ?? "users";
+			$suffix = $_GET["suffix"] ?? "user";
 
-	}
+			$validate = Connection::tokenValidate($_GET["token"],$tableToken,$suffix);
 
-    
+			/*===== Solicitamos respuesta del controlador para crear datos en cualquier tabla =====*/
+			if($validate == "ok"){
+				$response -> postData($table, $_POST);
+			}
+
+			/*===== Error cuando el token ha expirado ======*/	
+			if($validate == "expired"){
+
+				$json = array(
+					'status' => 303,
+					'results' => "Error: The token has expired"
+				);
+
+				echo json_encode($json, http_response_code($json["status"]));
+
+				return;
+
+			}
+			
+			/*====== Error cuando el token no coincide en BD =======*/	
+			if($validate == "no-auth"){
+
+				$json = array(
+					'status' => 400,
+					'results' => "Error: The user is not authorized"
+				);
+
+				echo json_encode($json, http_response_code($json["status"]));
+
+				return;
+
+			}
+
+		/*===== Error cuando no envía token =====*/	
+		} else {
+
+			$json = array(
+				'status' => 400,
+				'results' => "Error: Authorization required"
+		   	);
+
+		   	echo json_encode($json, http_response_code($json["status"]));
+
+		   	return;	
+
+		}
+
+		
+	} 
+
 
 }

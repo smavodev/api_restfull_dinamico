@@ -1,7 +1,7 @@
 <?php
 
-
-
+require_once "models/connection.php";
+require_once "controllers/post.controller.php";
 
 class Connection{
 
@@ -83,6 +83,30 @@ class Connection{
 
 		return $token;
 	}
+
+
+	/*===== Validar el token de seguridad =====*/
+	static public function tokenValidate($token,$table,$suffix){
+
+		/*===== Traemos el usuario de acuerdo al token =====*/
+		$user = GetModel::getDataFilter($table, "token_exp_".$suffix, "token_".$suffix, $token, null,null,null,null);
+		
+		if(!empty($user)){
+			/*===== Validamos que el token no haya expirado =====*/	
+			$time = time();
+
+			if($time < $user[0]->{"token_exp_".$suffix}){
+				return "ok";
+			}else{
+				return "expired";
+			}
+
+		}else{
+			return "no-auth";
+		}
+
+	}
+
 
 
 }
