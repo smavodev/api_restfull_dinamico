@@ -34,9 +34,16 @@ if(isset($_POST)){
 	if(isset($_GET["register"]) && $_GET["register"] == true){
 	
 		$suffix = $_GET["suffix"] ?? "user";
+		
 		$response -> postRegister($table,$_POST,$suffix);
 
-	} else {
+	}else if(isset($_GET["login"]) && $_GET["login"] == true){
+
+		$suffix = $_GET["suffix"] ?? "user";
+
+		$response -> postLogin($table,$_POST,$suffix);
+
+	}else{
 
 
 		$response -> postData($table, $_POST);
