@@ -40,44 +40,73 @@ if(isset($_GET["id"]) && isset($_GET["nameId"])){
 	/*===== Peticion PUT para usuarios autorizados =====*/
 	if(isset($_GET["token"])){
 
-		$tableToken = $_GET["table"] ?? "users";
-		$suffix = $_GET["suffix"] ?? "user";
+		/*======= Peticion PUT para usuarios no autorizados ======*/
 
-		$validate = Connection::tokenValidate($_GET["token"],$tableToken,$suffix);
+		if($_GET["token"] == "no" && isset($_GET["except"])){
 
-		/*===== Solicitamos respuesta del controlador para editar datos en cualquier tabla =====*/		
-		if($validate == "ok"){
+			/*====== Validar la tabla y las columnas ======*/
+			$columns = array($_GET["except"]);
+
+			if(empty(Connection::getColumnsData($table, $columns))){
+
+				$json = array(
+				 	'status' => 400,
+				 	'results' => "Error: Fields in the form do not match the database"
+				);
+
+				echo json_encode($json, http_response_code($json["status"]));
+
+				return;
+
+			}
+
+			/*====== Solicitamos respuesta del controlador para crear datos en cualquier tabla ======*/		
 			$response = new PutController();
 			$response -> putData($table,$data,$_GET["id"],$_GET["nameId"]);
-		}
 
-		/*===== Error cuando el token ha expirado ======*/	
-		if($validate == "expired"){
+		/*====== Peticion PUT para usuarios autorizados =======*/
+		}else{
 
-			$json = array(
-				'status' => 303,
-				'results' => "Error: The token has expired"
-			);
+			$tableToken = $_GET["table"] ?? "users";
+			$suffix = $_GET["suffix"] ?? "user";
 
-			echo json_encode($json, http_response_code($json["status"]));
+			$validate = Connection::tokenValidate($_GET["token"],$tableToken,$suffix);
 
-			return;
+			/*===== Solicitamos respuesta del controlador para editar datos en cualquier tabla =====*/		
+			if($validate == "ok"){
+				$response = new PutController();
+				$response -> putData($table,$data,$_GET["id"],$_GET["nameId"]);
+			}
 
-		}
+			/*===== Error cuando el token ha expirado ======*/	
+			if($validate == "expired"){
 
-		/*====== Error cuando el token no coincide en BD =====*/	
-		if($validate == "no-auth"){
+				$json = array(
+					'status' => 303,
+					'results' => "Error: The token has expired"
+				);
 
-			$json = array(
-				 'status' => 400,
-				 'results' => "Error: The user is not authorized"
-			);
+				echo json_encode($json, http_response_code($json["status"]));
 
-			echo json_encode($json, http_response_code($json["status"]));
+				return;
 
-			return;
+			}
 
-		}
+			/*====== Error cuando el token no coincide en BD =====*/	
+			if($validate == "no-auth"){
+
+				$json = array(
+					'status' => 400,
+					'results' => "Error: The user is not authorized"
+				);
+
+				echo json_encode($json, http_response_code($json["status"]));
+
+				return;
+
+			}
+		
+		}	
 
 
 	/*====== Error cuando no envía token ======*/	
