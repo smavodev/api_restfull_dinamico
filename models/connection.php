@@ -8,7 +8,7 @@ class Connection{
     /*===== Información de la base de datos =====*/
 	static public function infoDatabase(){
 		$infoDB = array(
-			"database" => "database-1",
+			"database" => "marketplace",
 			"user" => "root",
 			"pass" => ""
 		);
@@ -26,7 +26,7 @@ class Connection{
 	/*===== Acceso público ======*/
 	static public function publicAccess(){
 
-		$tables = ["courses","intructors"];
+		$tables = [""];
 
 		return $tables;
 
