@@ -1,7 +1,7 @@
 <?php
 
-require_once "models/connection.php";
-require_once "controllers/post.controller.php";
+require_once "get.model.php";
+
 
 class Connection{
 
@@ -14,6 +14,25 @@ class Connection{
 		);
 		return $infoDB;
 	}
+
+
+	static public function apikey(){
+
+		return "c5LTA6WPbMwHhEabYu771nd11smart";
+
+	}
+
+
+	/*===== Acceso público ======*/
+	static public function publicAccess(){
+
+		$tables = ["courses","intructors"];
+
+		return $tables;
+
+	}
+
+
 
     /*===== Conexión a la base de datos  =====*/
     static public function connect(){
