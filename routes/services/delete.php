@@ -21,8 +21,65 @@ if(isset($_GET["id"]) && isset($_GET["nameId"])){
 
 	}
 
-    $response = new DeleteController();
-    $response -> deleteData($table,$_GET["id"],$_GET["nameId"]);
+	/*====== Peticion DELETE para usuarios autorizados ======*/
+	if(isset($_GET["token"])){
+
+		$tableToken = $_GET["table"] ?? "users";
+		$suffix = $_GET["suffix"] ?? "user";
+
+		$validate = Connection::tokenValidate($_GET["token"],$tableToken,$suffix);
+
+		/*====== Solicitamos respuesta del controlador para eliminar datos en cualquier tabla ======*/	
+		if($validate == "ok"){
+
+			$response = new DeleteController();
+			$response -> deleteData($table,$_GET["id"],$_GET["nameId"]);
+		}
+
+		/*====== Error cuando el token ha expirado ======*/	
+		if($validate == "expired"){
+
+			$json = array(
+			 	'status' => 303,
+			 	'results' => "Error: The token has expired"
+			);
+
+			echo json_encode($json, http_response_code($json["status"]));
+
+			return;
+
+		}
+
+		/*====== Error cuando el token no coincide en BD ======*/	
+
+		if($validate == "no-auth"){
+
+			$json = array(
+			 	'status' => 400,
+			 	'results' => "Error: The user is not authorized"
+			);
+
+			echo json_encode($json, http_response_code($json["status"]));
+
+			return;
+
+		}
+
+	/*======= Error cuando no envía token ======*/	
+
+	}else{
+
+		$json = array(
+		 	'status' => 400,
+		 	'results' => "Error: Authorization required"
+		);
+
+		echo json_encode($json, http_response_code($json["status"]));
+
+		return;	
+
+	}	
+
 
 
 }

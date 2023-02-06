@@ -1,16 +1,38 @@
 <?php
 
+require_once "get.model.php";
+
+
 class Connection{
 
     /*===== Información de la base de datos =====*/
 	static public function infoDatabase(){
 		$infoDB = array(
-			"database" => "database-2",
+			"database" => "marketplace",
 			"user" => "root",
 			"pass" => ""
 		);
 		return $infoDB;
 	}
+
+
+	static public function apikey(){
+
+		return "c5LTA6WPbMwHhEabYu771nd11smart";
+
+	}
+
+
+	/*===== Acceso público ======*/
+	static public function publicAccess(){
+
+		$tables = [""];
+
+		return $tables;
+
+	}
+
+
 
     /*===== Conexión a la base de datos  =====*/
     static public function connect(){
@@ -61,5 +83,49 @@ class Connection{
 		}
 
 	}
+
+
+	/*====== Generar Token de Autenticación =====*/
+	static public function jwt($id, $email){
+
+		$time = time();
+
+		$token = array(
+			"iat" =>  $time,//Tiempo en que inicia el token
+			"exp" => $time + (60*60*24), // Tiempo en que expirará el token (1 día)
+			"data" => [
+
+				"id" => $id,
+				"email" => $email
+			]
+		);
+
+		return $token;
+	}
+
+
+	/*===== Validar el token de seguridad =====*/
+	static public function tokenValidate($token,$table,$suffix){
+
+		/*===== Traemos el usuario de acuerdo al token =====*/
+		$user = GetModel::getDataFilter($table, "token_exp_".$suffix, "token_".$suffix, $token, null,null,null,null);
+		
+		if(!empty($user)){
+			/*===== Validamos que el token no haya expirado =====*/	
+			$time = time();
+
+			if($time < $user[0]->{"token_exp_".$suffix}){
+				return "ok";
+			}else{
+				return "expired";
+			}
+
+		}else{
+			return "no-auth";
+		}
+
+	}
+
+
 
 }
