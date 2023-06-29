@@ -74,3 +74,6 @@ RewriteRule ^ index.php [QSA,L]
 
 ### Instalar php-JWT
 composer require firebase/php-jwt
+
+## Ruta Github 
+https://github.com/smavo/api_restfull_dinamico
