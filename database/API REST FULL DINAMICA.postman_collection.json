@@ -1,0 +1,1772 @@
+{
+	"info": {
+		"_postman_id": "f1ddcf1a-a2da-4041-8328-5afe786dfc68",
+		"name": "API REST FULL DINAMICA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11696857",
+		"_collection_link": "https://bold-satellite-817203.postman.co/workspace/Smavodev-2023~34707816-1144-4c57-9851-618958bf56e0/collection/11696857-f1ddcf1a-a2da-4041-8328-5afe786dfc68?action=share&creator=11696857&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "PETICIONES GET",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}",
+							"host": [
+								"{{apirest}}"
+							]
+						},
+						"description": "StartFragment\n\nhttp://apirest.test/products\n\nEndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							]
+						},
+						"description": "StartFragment\n\nhttp://apirest.test/products\n\nEndFragment"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT ",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=id_product,name_product",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product"
+								}
+							]
+						},
+						"description": "[http://apirest.test/products?Select=id_product](http://apirest.test/products?select=id_product),name_product"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + 1  FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/products?select=id_product,name_product,date_created_product&linkTo=id_product&equalTo=1",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product,date_created_product"
+								},
+								{
+									"key": "linkTo",
+									"value": "id_product"
+								},
+								{
+									"key": "equalTo",
+									"value": "1"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=id_product,name_product&linkTo=id_product&equalTo=1"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + 2 FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/products?select=id_product,name_product,date_created_product&linkTo=id_product,date_created_product&equalTo=1,2020-07-14",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product,date_created_product"
+								},
+								{
+									"key": "linkTo",
+									"value": "id_product,date_created_product"
+								},
+								{
+									"key": "equalTo",
+									"value": "1,2020-07-14"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=id_product,name_product,date_created_product&linkTo=id_product,date_created_product&equalTo=1,2021-10-19"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + ORDEN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&orderBy=id_product&orderMode=DESC",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&orderBy=id_product&orderMode=DESC"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + FILTRO + ORDEN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=id_category_product&orderBy=id_product&orderMode=DESC&equalTo=4",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "id_category_product"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "equalTo",
+									"value": "4"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=id_category_product&orderBy=id_product&orderMode=DESC&equalTo=4"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + FILTRO + ORDER + LIMIT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=id_category_product&orderBy=id_product&orderMode=DESC&equalTo=4&startAt=0&endAt=3",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "id_category_product"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "equalTo",
+									"value": "4"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET + REL + SELECT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/relations?rel=products,categories&type=product,category",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*",
+									"disabled": true
+								},
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category\r\n\r\nPrimero va la tabla relacionada, luego a la que se tiene relacionada el id"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + REL + SELECT + ORDEN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/relations?select=id_product,name_product,id_category,name_category&rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product,id_category,name_category"
+								},
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_category"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + REL + SELECT + ORDEN + LIMIT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/relations?select=id_product,name_product,id_category,name_category&rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC&startAt=0&endAt=5",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product,id_category,name_category"
+								},
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_category"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "5"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC&startAt=0&endAt=5"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + REL + SELECT + ORDEN + LIMIT + FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/relations?select=id_product,name_product,id_category,name_category&rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC&startAt=0&endAt=3&linkTo=id_category&equalTo=6",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "id_product,name_product,id_category,name_category"
+								},
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_category"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "3"
+								},
+								{
+									"key": "linkTo",
+									"value": "id_category"
+								},
+								{
+									"key": "equalTo",
+									"value": "6"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?select=id_product,name_product,id_category,name_category&rel=products,categories&type=product,category&orderBy=id_category&orderMode=DESC&startAt=0&endAt=3&linkTo=id_category&equalTo=6"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + SEARCH",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=name_product&search=Samsung",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "name_product"
+								},
+								{
+									"key": "search",
+									"value": "Samsung"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=name_product&search=Samsung"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + SEARCH + FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/products?select=*&linkTo=name_product,id_category_product&search=Wireless,1",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "name_product,id_category_product"
+								},
+								{
+									"key": "search",
+									"value": "Wireless,1"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=name_product,id_category_product&search=Sound,3"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + SEARCH + FILTRO + REL",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Portable,1",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "name_product,id_category_product"
+								},
+								{
+									"key": "search",
+									"value": "Portable,1"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Xbox,2"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + SEARCH  + FILTRO + REL + LIMIT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Marshall,1&startAt=0&endAt=2",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "name_product,id_category_product"
+								},
+								{
+									"key": "search",
+									"value": "Marshall,1"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "2"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Xbox,2&startAt=0&endAt=2"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + SELECT + SEARCH  + FILTRO + REL + LIMIT + ORDEN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Wireless,1&startAt=0&endAt=3&orderBy=id_product&orderMode=DESC",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "name_product,id_category_product"
+								},
+								{
+									"key": "search",
+									"value": "Wireless,1"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "3"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=name_product,id_category_product&search=Xbox,2&startAt=0&endAt=2&orderBy=id_product&orderMode=DESC"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + RANGO FECHAS + SELECT ",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=date_created_product&between1=2000-10-15&between2=2021-10-28",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "date_created_product"
+								},
+								{
+									"key": "between1",
+									"value": "2000-10-15"
+								},
+								{
+									"key": "between2",
+									"value": "2021-10-28"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=date_created_product&between1=2021-10-15&between2=2021-10-28"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + RANGO FECHAS + SELECT + ORDEN",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=date_created_product&between1=2000-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "date_created_product"
+								},
+								{
+									"key": "between1",
+									"value": "2000-10-15"
+								},
+								{
+									"key": "between2",
+									"value": "2021-10-28"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=date_created_product&between1=2021-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + RANGO FECHAS + SELECT + ORDEN + LIMIT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=date_created_product&between1=2000-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC&startAt=0&endAt=5",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "date_created_product"
+								},
+								{
+									"key": "between1",
+									"value": "2000-10-15"
+								},
+								{
+									"key": "between2",
+									"value": "2021-10-28"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "5"
+								}
+							]
+						},
+						"description": "\r\nhttp://apirest.test/products?select=*&linkTo=date_created_product&between1=2021-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC&startAt=0&endAt=5"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + RANGO FECHAS + SELECT + ORDEN + LIMIT + FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/products?select=*&linkTo=date_created_product&between1=2000-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC&startAt=0&endAt=8&filterTo=id_category_product&inTo=5,6",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "date_created_product"
+								},
+								{
+									"key": "between1",
+									"value": "2000-10-15"
+								},
+								{
+									"key": "between2",
+									"value": "2021-10-28"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "8"
+								},
+								{
+									"key": "filterTo",
+									"value": "id_category_product"
+								},
+								{
+									"key": "inTo",
+									"value": "5,6"
+								}
+							]
+						},
+						"description": "http://apirest.test/products?select=*&linkTo=date_created_product&between1=2021-10-15&between2=2021-10-28&orderBy=id_product&orderMode=DESC&startAt=0&endAt=5&filterTo=id_category_product&inTo=5,6"
+					},
+					"response": []
+				},
+				{
+					"name": "GET + REL + RANGO FECHAS + SELECT + ORDEN + LIMIT + FILTRO",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/relations?rel=products,categories&type=product,category&select=*&linkTo=date_created_product&between1=2000-10-15&between2=2021-10-28&orderBy=id_product&orderMode=ASC&startAt=0&endAt=3&filterTo=id_category_product&inTo=6",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"relations"
+							],
+							"query": [
+								{
+									"key": "rel",
+									"value": "products,categories"
+								},
+								{
+									"key": "type",
+									"value": "product,category"
+								},
+								{
+									"key": "select",
+									"value": "*"
+								},
+								{
+									"key": "linkTo",
+									"value": "date_created_product"
+								},
+								{
+									"key": "between1",
+									"value": "2000-10-15"
+								},
+								{
+									"key": "between2",
+									"value": "2021-10-28"
+								},
+								{
+									"key": "orderBy",
+									"value": "id_product"
+								},
+								{
+									"key": "orderMode",
+									"value": "ASC"
+								},
+								{
+									"key": "startAt",
+									"value": "0"
+								},
+								{
+									"key": "endAt",
+									"value": "3"
+								},
+								{
+									"key": "filterTo",
+									"value": "id_category_product"
+								},
+								{
+									"key": "inTo",
+									"value": "6"
+								}
+							]
+						},
+						"description": "http://apirest.test/relations?rel=products,categories&type=product,category&select=*&linkTo=date_created_product&between1=2021-10-15&between2=2021-10-28&orderBy=id_product&orderMode=ASC&startAt=0&endAt=8&filterTo=id_category_product&inTo=6"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PETICIONES POST",
+			"item": [
+				{
+					"name": "GET - USER",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/users?orderBy=id_user&orderMode=DESC",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "id_user"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET - CATEGORIES",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/categories?orderBy=id_category&orderMode=DESC&",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "orderBy",
+									"value": "id_category"
+								},
+								{
+									"key": "orderMode",
+									"value": "DESC"
+								},
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						},
+						"description": "http://apirest.test/instructors"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title_course",
+									"value": "Aprende Testing ISTQB FL",
+									"type": "text"
+								},
+								{
+									"key": "description_course",
+									"value": "Curso de Testing bajo el marco ISTQB ",
+									"type": "text"
+								},
+								{
+									"key": "id_instructor_course",
+									"value": "19",
+									"type": "text"
+								},
+								{
+									"key": "price_course",
+									"value": "29.99",
+									"type": "text"
+								},
+								{
+									"key": "date_created_course",
+									"value": "2323-02-05",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/courses",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							]
+						},
+						"description": "http://apirest.test/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjA2MjAsImV4cCI6MTY3NTcwNzAyMCwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.OOgQfS-M8YYuaAztaStYBmqIGMULFF2UsI6KZKyFp_o&table=instructors&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Registrar + TOKEN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title_course",
+									"value": "Aprende Testing ISTQB FL",
+									"type": "text"
+								},
+								{
+									"key": "description_course",
+									"value": "Curso de Testing bajo el marco ISTQB ",
+									"type": "text"
+								},
+								{
+									"key": "id_instructor_course",
+									"value": "19",
+									"type": "text"
+								},
+								{
+									"key": "price_course",
+									"value": "29.99",
+									"type": "text"
+								},
+								{
+									"key": "date_created_course",
+									"value": "2323-02-05",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ&table=instructors&suffix=instructor",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ"
+								},
+								{
+									"key": "table",
+									"value": "instructors"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								}
+							]
+						},
+						"description": "http://apirest.test/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjA2MjAsImV4cCI6MTY3NTcwNzAyMCwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.OOgQfS-M8YYuaAztaStYBmqIGMULFF2UsI6KZKyFp_o&table=instructors&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Registrar - TOKEN + EXCEPT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title_course",
+									"value": "Aprende Testing ISTQB FL - 2018",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description_course",
+									"value": "Curso de Testing bajo el marco ISTQB ",
+									"type": "text"
+								},
+								{
+									"key": "id_instructor_course",
+									"value": "19",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "price_course",
+									"value": "29.99",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "date_created_course",
+									"value": "2323-02-05",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/courses?token=no&table=instructors&suffix=instructor&except=description_course",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "no"
+								},
+								{
+									"key": "table",
+									"value": "instructors"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								},
+								{
+									"key": "except",
+									"value": "description_course"
+								}
+							]
+						},
+						"description": "http://apirest.test/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjA2MjAsImV4cCI6MTY3NTcwNzAyMCwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.OOgQfS-M8YYuaAztaStYBmqIGMULFF2UsI6KZKyFp_o&table=instructors&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username_instructor",
+									"value": "test31",
+									"type": "text"
+								},
+								{
+									"key": "name_instructor",
+									"value": "Demo Test 31",
+									"type": "text"
+								},
+								{
+									"key": "email_instructor",
+									"value": "test31@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password_instructor",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/instructors?register=true&suffix=instructor",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"instructors"
+							],
+							"query": [
+								{
+									"key": "register",
+									"value": "true"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								}
+							]
+						},
+						"description": "http://apirest.test/instructors?register=true&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - Register - PWD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username_instructor",
+									"value": "test1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "name_instructor",
+									"value": "Demo Test",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email_instructor",
+									"value": "test2@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/instructors?register=true&suffix=instructor",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"instructors"
+							],
+							"query": [
+								{
+									"key": "register",
+									"value": "true"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								}
+							]
+						},
+						"description": "http://apirest.test/instructors?register=true&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email_user",
+									"value": "martintest@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password_user",
+									"value": "1nd1sm4rt",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/users?login=true&suffix=user",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "true"
+								},
+								{
+									"key": "suffix",
+									"value": "user"
+								}
+							]
+						},
+						"description": "http://apirest.test/instructors?login=true&suffix=instructor"
+					},
+					"response": []
+				},
+				{
+					"name": "POST - LOGIN - PWD",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email_instructor",
+									"value": "test2@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://apirest.test/instructors?login=true&suffix=instructor",
+							"protocol": "http",
+							"host": [
+								"apirest",
+								"test"
+							],
+							"path": [
+								"instructors"
+							],
+							"query": [
+								{
+									"key": "login",
+									"value": "true"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								}
+							]
+						},
+						"description": "http://apirest.test/instructors?login=true&suffix=instructor"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PETICIONS PUT",
+			"item": [
+				{
+					"name": "PUT - Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name_category",
+									"value": "House Xperto II",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/categories?id=8&nameId=id_category",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "8"
+								},
+								{
+									"key": "nameId",
+									"value": "id_category"
+								}
+							]
+						},
+						"description": "http://apirest.test/categories?id=8&nameId=id_category"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update + TOKEN",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title_course",
+									"value": "Aprende Testing II",
+									"type": "text"
+								},
+								{
+									"key": "description_course",
+									"value": "Curso de Testing bajo el marco ISTQB 2018",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ&table=instructors&suffix=instructor&id=64&nameId=id_course",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ"
+								},
+								{
+									"key": "table",
+									"value": "instructors"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								},
+								{
+									"key": "id",
+									"value": "64"
+								},
+								{
+									"key": "nameId",
+									"value": "id_course"
+								}
+							]
+						},
+						"description": "http://apirest.test/categories?id=8&nameId=id_category"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT - Update - TOKEN + EXCEPT",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title_course",
+									"value": "Aprende Testing II",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "description_course",
+									"value": "Curso de Testing bajo el marco ISTQB FL 2018 ",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{apirest}}/courses?token=no&table=instructors&suffix=instructor&id=64&nameId=id_course&except=description_course",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "no"
+								},
+								{
+									"key": "table",
+									"value": "instructors"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								},
+								{
+									"key": "id",
+									"value": "64"
+								},
+								{
+									"key": "nameId",
+									"value": "id_course"
+								},
+								{
+									"key": "except",
+									"value": "description_course"
+								}
+							]
+						},
+						"description": "http://apirest.test/categories?id=8&nameId=id_category"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PETICIONES DELETE",
+			"item": [
+				{
+					"name": "DELETE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{apirest}}/categories?id=9&nameId=id_category",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "9"
+								},
+								{
+									"key": "nameId",
+									"value": "id_category"
+								}
+							]
+						},
+						"description": "http://apirest.test/categories?id=9&nameId=id_category"
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE + TOKEN",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "c5LTA6WPbMwHhEabYu771nd11smart",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{apirest}}/courses?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ&table=instructors&suffix=instructor&id=65&nameId=id_course",
+							"host": [
+								"{{apirest}}"
+							],
+							"path": [
+								"courses"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2NzU2MjE5OTIsImV4cCI6MTY3NTcwODM5MiwiZGF0YSI6eyJpZCI6MjcsImVtYWlsIjoidGVzdDFAZ21haWwuY29tIn19.5PVkHsCtusOnBvUsCQYbk5bbsdOO0MDDMnQwsuPHhDQ"
+								},
+								{
+									"key": "table",
+									"value": "instructors"
+								},
+								{
+									"key": "suffix",
+									"value": "instructor"
+								},
+								{
+									"key": "id",
+									"value": "65"
+								},
+								{
+									"key": "nameId",
+									"value": "id_course"
+								}
+							]
+						},
+						"description": "http://apirest.test/categories?id=9&nameId=id_category"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
