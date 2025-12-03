@@ -76,4 +76,4 @@ RewriteRule ^ index.php [QSA,L]
 composer require firebase/php-jwt
 
 ## Ruta Github 
-https://github.com/smavo/api_restfull_dinamico
+https://github.com/smavodev/api_restfull_dinamico
